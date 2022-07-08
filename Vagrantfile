@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "generic/ubuntu2010" # Base box for our lab
+  config.vm.box = "generic/ubuntu2204" # Base box for our lab
 
   # Synced folder. Needed for ansible_local
   config.vm.synced_folder ".", "/vagrant"
@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
 
   # Vagrant ssh options to have the environment closer to plug and play
   # May be later I'll ansibilize this.
-  config.ssh.forward_x11 = true # We need this to play mission python game
+  # config.ssh.forward_x11 = true # We need this to play mission python game
 
   # Ansible provision config
   # Ansible will be run from the guest, as in inception.

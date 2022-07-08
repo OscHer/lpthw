@@ -12,41 +12,41 @@
       name: python3.9-full
       state: present
 
-  - name: Install mission python related packages
-    apt:
-      name: python3-pygame, python3-pgzero
-      state: present
+  #- name: Install mission python related packages
+  #  apt:
+  #    name: python3-pygame, python3-pgzero
+  #    state: present
 
-  - name: Install x11 utils and dependencies
-    apt:
-      name: x11-utils
-      state: present
+  #- name: Install x11 utils and dependencies
+  #  apt:
+  #    name: x11-utils
+  #    state: present
 
-  - name: Install sound dependencies 
-    apt:
-      name: pulseaudio
-      state: present
+  #- name: Install sound dependencies 
+  #  apt:
+  #    name: pulseaudio
+  #    state: present
 
-  - name: Ensure X11 is not using localhost
-    lineinfile:
-      create: yes
-      line: X11UseLocalhost no
-      owner: root
-      state: present
-      path: /etc/ssh/sshd_config.d/X11.conf
+  #- name: Ensure X11 is not using localhost
+  #  lineinfile:
+  #    create: yes
+  #    line: X11UseLocalhost no
+  #    owner: root
+  #    state: present
+  #    path: /etc/ssh/sshd_config.d/X11.conf
 
-  - name: Restart sshd
-    service:
-      name: sshd
-      state: restarted
+  #- name: Restart sshd
+  #  service:
+  #    name: sshd
+  #    state: restarted
 
-  - name: Create mission python directory
-    file:
-      path: /home/vagrant/devel/escape
-      state: directory
+  #- name: Create mission python directory
+  #  file:
+  #    path: /home/vagrant/devel/escape
+  #    state: directory
 
-  - name: Download and extract mission python sources
-    ansible.builtin.unarchive:
-      src: https://nostarch.com/download/escape.zip
-      dest: /home/vagrant/devel/escape/
-      remote_src: yes
+  #- name: Download and extract mission python sources
+  #  ansible.builtin.unarchive:
+  #    src: https://nostarch.com/download/escape.zip
+  #    dest: /home/vagrant/devel/escape/
+  #    remote_src: yes
