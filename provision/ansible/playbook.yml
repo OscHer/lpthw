@@ -25,6 +25,9 @@
       repo: https://github.com/VundleVim/Vundle.vim.git
       dest: /home/vagrant/.vim/bundle/Vundle.vim
 
+  - name: Install vim plugins via Vundle
+    shell: vim +PluginInstall +qall
+
   #- name: Install python full package
   #  apt:
   #    name: python3.9-full
