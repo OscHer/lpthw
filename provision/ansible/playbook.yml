@@ -7,10 +7,14 @@
     apt:
       update_cache: yes
 
-  - name: Install python full package
-    apt:
-      name: python3.9-full
-      state: present
+  - name: Show python version
+    debug:
+      msg: The python version is {{ ansible_facts.python_version }}
+
+  #- name: Install python full package
+  #  apt:
+  #    name: python3.9-full
+  #    state: present
 
   #- name: Install mission python related packages
   #  apt:
