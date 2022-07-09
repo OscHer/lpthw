@@ -22,11 +22,6 @@
       owner: vagrant
       mode: '664'
 
-  - name: Ensure Vundle plugin manager is installed
-    git:
-      repo: https://github.com/VundleVim/Vundle.vim.git
-      dest: /home/vagrant/.vim/bundle/Vundle.vim
-
   - name: Ensure .vim directory and files are owned by vagrant user and group
     file:
       path: /home/vagrant/.vim
@@ -35,8 +30,12 @@
       owner: vagrant
       group: vagrant
 
-  - name: Show owner an permissions por Vundle dir
-    shell:  ls -l /home/vagrant/.vimrc/
+  - name: Ensure Vundle plugin manager is installed
+    git:
+      repo: https://github.com/VundleVim/Vundle.vim.git
+      dest: /home/vagrant/.vim/bundle/Vundle.vim
+    become: yes
+    become_user: vagrant # Needed to avoid Git security compliance: https://stackoverflow.com/questions/72299489/unsafe-repository-owned-by-someone-else-ok-but-who
 
   - name: Install vim plugins via Vundle
     shell: echo -ne '\n' | vim -E -s -c "source /home/vagrant/.vimrc" -c PluginInstall -c qa
