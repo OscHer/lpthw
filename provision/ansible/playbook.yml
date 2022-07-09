@@ -37,8 +37,12 @@
     become: yes
     become_user: vagrant # Needed to avoid Git security compliance: https://stackoverflow.com/questions/72299489/unsafe-repository-owned-by-someone-else-ok-but-who
 
+  # Idempotent but not declarative. TODO
   - name: Install vim plugins via Vundle
-    shell: echo -ne '\n' | vim -E -s -c "source /home/vagrant/.vimrc" -c PluginInstall -c qa
+    #shell: echo -ne '\n' | vim -E -s -c "source /home/vagrant/.vimrc" -c PluginInstall -c qa
+    shell: vim +PluginInstall +qall! 
+    become: yes
+    become_user: vagrant
 
   #- name: Install python full package
   #  apt:
