@@ -7,46 +7,83 @@
     apt:
       update_cache: yes
 
-  - name: Install python full package
+  - name: Show python version
+    debug:
+      msg: The python version is {{ ansible_facts.python_version }}
+
+  - name: Ensure vim is installed
     apt:
-      name: python3.9-full
       state: present
 
-  - name: Install mission python related packages
-    apt:
-      name: python3-pygame, python3-pgzero
-      state: present
+  - name: Ensure vimrc is deployed
+    copy:
+      src: /vagrant/provision/files/vimrc
+      dest: /home/vagrant/.vimrc
+      owner: vagrant
+      mode: '664'
 
-  - name: Install x11 utils and dependencies
-    apt:
-      name: x11-utils
-      state: present
-
-  - name: Install sound dependencies 
-    apt:
-      name: pulseaudio
-      state: present
-
-  - name: Ensure X11 is not using localhost
-    lineinfile:
-      create: yes
-      line: X11UseLocalhost no
-      owner: root
-      state: present
-      path: /etc/ssh/sshd_config.d/X11.conf
-
-  - name: Restart sshd
-    service:
-      name: sshd
-      state: restarted
-
-  - name: Create mission python directory
+  - name: Ensure .vim directory and files are owned by vagrant user and group
     file:
-      path: /home/vagrant/devel/escape
+      path: /home/vagrant/.vim
       state: directory
+      recurse: yes
+      owner: vagrant
+      group: vagrant
 
-  - name: Download and extract mission python sources
-    ansible.builtin.unarchive:
-      src: https://nostarch.com/download/escape.zip
-      dest: /home/vagrant/devel/escape/
-      remote_src: yes
+  - name: Ensure Vundle plugin manager is installed
+    git:
+      repo: https://github.com/VundleVim/Vundle.vim.git
+      dest: /home/vagrant/.vim/bundle/Vundle.vim
+    become: yes
+    become_user: vagrant # Needed to avoid Git security compliance: https://stackoverflow.com/questions/72299489/unsafe-repository-owned-by-someone-else-ok-but-who
+
+  # Idempotent but not declarative. TODO
+  - name: Install vim plugins via Vundle
+    #shell: echo -ne '\n' | vim -E -s -c "source /home/vagrant/.vimrc" -c PluginInstall -c qa
+    shell: vim +PluginInstall +qall! 
+    become: yes
+    become_user: vagrant
+
+  #- name: Install python full package
+  #  apt:
+  #    name: python3.9-full
+  #    state: present
+
+  #- name: Install mission python related packages
+  #  apt:
+  #    name: python3-pygame, python3-pgzero
+  #    state: present
+
+  #- name: Install x11 utils and dependencies
+  #  apt:
+  #    name: x11-utils
+  #    state: present
+
+  #- name: Install sound dependencies 
+  #  apt:
+  #    name: pulseaudio
+  #    state: present
+
+  #- name: Ensure X11 is not using localhost
+  #  lineinfile:
+  #    create: yes
+  #    line: X11UseLocalhost no
+  #    owner: root
+  #    state: present
+  #    path: /etc/ssh/sshd_config.d/X11.conf
+
+  #- name: Restart sshd
+  #  service:
+  #    name: sshd
+  #    state: restarted
+
+  #- name: Create mission python directory
+  #  file:
+  #    path: /home/vagrant/devel/escape
+  #    state: directory
+
+  #- name: Download and extract mission python sources
+  #  ansible.builtin.unarchive:
+  #    src: https://nostarch.com/download/escape.zip
+  #    dest: /home/vagrant/devel/escape/
+  #    remote_src: yes

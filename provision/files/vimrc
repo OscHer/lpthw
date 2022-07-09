@@ -1,0 +1,115 @@
+"Vundle settigns block {{{
+"https://github.com/VundleVim/Vundle.vim
+set nocompatible
+filetype off
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+"Load plugins managed by Vundle
+Plugin 'vim-airline/vim-airline'            "Statusbar plugin with no python dependencies
+Plugin 'vim-airline/vim-airline-themes'     "Themes for said plugin
+Plugin 'tpope/vim-fugitive'                 "Plugin for integration with git.
+Plugin 'rbong/vim-flog'                     "Another git integration plugin
+Plugin 'preservim/NERDTree'                 "Powerful file browser
+Plugin 'Xuyuanp/nerdtree-git-plugin'        "Integrate NERDTree with git
+Plugin 'preservim/nerdcommenter'            "Easy and light code comment tool
+Plugin 'Yggdroot/indentLine'                "Display thin vertical lines for indentation
+Plugin 'tpope/vim-surround'                 "Surround plugin to better treat with quotes, double quotes, brackets and the like
+Plugin 'pedrohdz/vim-yaml-folds'            "Fold yaml tags based on indentation: https://github.com/pedrohdz/vim-yaml-folds 
+"Plugin 'ryanoasis/vim-devicons'            "Icons ford nerdtree https://github.com/ryanoasis/vim-devicons
+
+
+call vundle#end()
+filetype plugin indent on
+"}}}
+
+
+"General settings
+set number                " Show line number
+set numberwidth=1         " Dedicated columns for line number
+set clipboard=unnamed     "
+syntax enable             " Enable syntax highlight for code
+set showcmd
+set encoding=utf-8
+set showmatch
+set sw=2
+set laststatus=2
+set showmode
+set tabstop=2
+set shiftwidth=4
+set expandtab             " Convert tabs into spaces
+set cursorcolumn          " Show full column for cursor position. This helps us when indenting 
+set cursorline            " Show full line for cursor position. This help us position line we're editing
+set nowrap                " Do not wrap long lines
+set hlsearch              " Highlight all matches when searching
+set undofile              " Persisten undo even if we reopen vim.
+set relativenumber        " Relative line number; let's give it a try
+
+hi CursorLine cterm=NONE ctermbg=red ctermfg=white    " Some styles for cursorline
+hi CursorColumn cterm=NONE ctermbg=red ctermfg=white  " Some style for cursorcolun
+nnoremap H :set cursorline! cursorcolumn!             " Toggle cursorline and cursor colum visibility with H key in normal mode
+
+
+"Airline plugin specific config
+"Enable powerline fonts for airline status bar
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+        let g:airline_symbols = {}
+    endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.maxlinenr = '㏑'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = 'Ɇ'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+
+" airline features on/off
+let g:airline#extensions#tabline#enabled = 1 "Show buffer name
+let g:airline#extensions#tabline#buffer_nr_show = 1 "Show buffer number before buffer name
+
+" NERDTree
+autocmd VimEnter * NERDTree       " Enable NERDTree on startup
+autocmd VimEnter * wincmd p       " Change windows focus from NERDTree to main window
+"let g:NERDTreeWinPos = "right"   " Position NERDTree at the right edge of the
+"screen by default
+let NERDTreeShowHidden=1          " Show hidden files in the file explorer by default
+let NERDTreeWinSize = 22          " Default value for NERDTree file explorer size
+
+"Nerdcommenter
+filetype plugin on
+let g:NERDCreateDefaultMappings = 1
+
+"IndentLine
+let g:indentLine_char = '⦙'
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+"vim-yaml-folds
+set foldlevelstart=3
+
+set omnifunc=syntaxcomplete#Complete
