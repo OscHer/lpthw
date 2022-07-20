@@ -55,3 +55,20 @@
 
   # TODO: Git init and git clone tasks
   # TODO: Config ssh keys for github repos
+
+  # TODO: git bash promt
+  - name: Ensure bash git prompt is deployed
+    git:
+      repo: https://github.com/magicmonty/bash-git-prompt.git
+      dest: ~/.bash-git-prompt
+
+  # TODO: modify bashrc to add call to bash-git prompt
+  - name: Ensure call to bash-git-prompt from .bashrc
+    blockinfile:
+      insertafter: EOF
+      backup: yes
+      block: |
+        GIT_PROMPT_ONLY_IN_REPO=1
+        GIT_PROMPT_THEME=Single_line
+        source ~/.bash-git-prompt/gitprompt.sh
+
