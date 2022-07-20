@@ -1,0 +1,4 @@
+# Install git clone
+git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
+
+Import dotfiles from github, gitlab, whatever. Instead of getting them from local
