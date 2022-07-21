@@ -56,11 +56,11 @@
   # TODO: Git init and git clone tasks
   # TODO: Config ssh keys for github repos
 
-  # TODO: git bash promt
   - name: Ensure bash git prompt is deployed
     git:
       repo: https://github.com/magicmonty/bash-git-prompt.git
-      dest: ~/.bash-git-prompt
+      dest: ~/.bash-git-prompt # TODO: abstract this intro env variable based on another variable pointing to the user
+    become_user: vagrant # TODO: view above 
 
   # TODO: modify bashrc to add call to bash-git prompt
   - name: Ensure call to bash-git-prompt from .bashrc
@@ -72,3 +72,4 @@
         GIT_PROMPT_THEME=Single_line
         source ~/.bash-git-prompt/gitprompt.sh
       path: ~/.bashrc
+    become_user: vagrant # TODO: abstract this intro env variable based on another variable pointing to the use
