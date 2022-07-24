@@ -2,6 +2,10 @@
 - name: 
   hosts: all
   become: yes
+
+  vars_files: 
+    - vars/user.yml
+
   tasks: 
   - name: Update repositories
     apt:
@@ -18,40 +22,40 @@
   - name: Ensure vimrc is deployed
     copy:
       src: /vagrant/provision/files/vimrc
-      dest: /home/vagrant/.vimrc
+      dest: "/home/{{ developer }}/.vimrc" 
       owner: vagrant
       mode: '664'
 
   - name: Ensure .vim directory and files are owned by vagrant user and group
     file:
-      path: /home/vagrant/.vim
+      path: "/home/{{ developer }}/.vim"
       state: directory
       recurse: yes
-      owner: vagrant
-      group: vagrant
+      owner: "{{ developer }}"
+      group: "{{ developer }}"
 
   - name: Ensure Vundle plugin manager is installed
     git:
       repo: https://github.com/VundleVim/Vundle.vim.git
-      dest: /home/vagrant/.vim/bundle/Vundle.vim
+      dest: "/home/{{ developer }}/.vim/bundle/Vundle.vim"
     become: yes
-    become_user: vagrant # Needed to avoid Git security compliance: https://stackoverflow.com/questions/72299489/unsafe-repository-owned-by-someone-else-ok-but-who
+    become_user: "{{ developer }}" # Needed to avoid Git security compliance: https://stackoverflow.com/questions/72299489/unsafe-repository-owned-by-someone-else-ok-but-who
 
-  # Idempotent but not declarative. TODO
+  # Idempotent but not declarative.
   - name: Install vim plugins via Vundle
     #shell: echo -ne '\n' | vim -E -s -c "source /home/vagrant/.vimrc" -c PluginInstall -c qa
     shell: vim +PluginInstall +qall! 
     become: yes
-    become_user: vagrant
+    become_user: "{{ developer }}"
 
   # Project directories and provisioning
   - name: Create projects folder
     file:
-      path: /home/vagrant/devel/ # TODO: Get values from variables
+      path: "/home/vagrant/devel/" # TODO: Get values from variables
       state: directory
       recurse: yes
-      owner: vagrant  # TODO: Get user value from variable
-      group: vagrant   # TODO: Get user value from variable
+      owner: "{{ developer }}"
+      group: "{{ developer }}"
 
   # TODO: Git init and git clone tasks
   # TODO: Config ssh keys for github repos
@@ -59,10 +63,9 @@
   - name: Ensure bash git prompt is deployed
     git:
       repo: https://github.com/magicmonty/bash-git-prompt.git
-      dest: ~/.bash-git-prompt # TODO: abstract this intro env variable based on another variable pointing to the user
-    become_user: vagrant # TODO: view above 
+      dest: ~/.bash-git-prompt
+    become_user: "{{ developer }}"
 
-  # TODO: modify bashrc to add call to bash-git prompt
   - name: Ensure call to bash-git-prompt from .bashrc
     blockinfile:
       insertafter: EOF
@@ -72,4 +75,4 @@
         GIT_PROMPT_THEME=Single_line
         source ~/.bash-git-prompt/gitprompt.sh
       path: ~/.bashrc
-    become_user: vagrant # TODO: abstract this intro env variable based on another variable pointing to the use
+    become_user: "{{ developer }}"
