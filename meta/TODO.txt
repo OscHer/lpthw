@@ -2,3 +2,15 @@
 git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
 
 Import dotfiles from github, gitlab, whatever. Instead of getting them from local
+
+
+provision/ansible/playbook.yml:40:  # Idempotent but not declarative. TODO
+provision/ansible/playbook.yml:50:      path: /home/vagrant/devel/ # TODO: Get values from variables
+provision/ansible/playbook.yml:53:      owner: vagrant  # TODO: Get user value from variable
+provision/ansible/playbook.yml:54:      group: vagrant   # TODO: Get user value from variable
+provision/ansible/playbook.yml:56:  # TODO: Git init and git clone tasks
+provision/ansible/playbook.yml:57:  # TODO: Config ssh keys for github repos
+provision/ansible/playbook.yml:62:      dest: ~/.bash-git-prompt # TODO: abstract this intro env variable based on another variable pointing to the user
+provision/ansible/playbook.yml:63:    become_user: vagrant # TODO: view above 
+provision/ansible/playbook.yml:65:  # TODO: modify bashrc to add call to bash-git prompt
+provision/ansible/playbook.yml:75:    become_user: vagrant # TODO: abstract this intro env variable based on another variable pointing to the use
