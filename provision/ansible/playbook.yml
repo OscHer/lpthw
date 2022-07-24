@@ -22,7 +22,7 @@
 
   - name: Ensure vimrc is deployed
     copy:
-      src: /vagrant/provision/files/vimrc
+      src: "{{ vimrc_origin }}" # /vagrant/provision/files/vimrc
       dest: "/home/{{ developer }}/.vimrc" 
       owner: vagrant
       mode: '664'
