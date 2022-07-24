@@ -52,7 +52,7 @@
   # Project directories and provisioning
   - name: Create projects folder
     file:
-      path: "/home/vagrant/devel/" # TODO: Get values from variables
+      path: "{{ projects_dir }}"
       state: directory
       recurse: yes
       owner: "{{ developer }}"
