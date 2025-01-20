@@ -9,4 +9,4 @@
 ######################################################################
 
 apt-get update && apt-get upgrade -y
-apt-get install -y git vim tmux
+apt-get install -y git vim tmux bash-completion universal-ctags
