@@ -16,6 +16,21 @@ experience; so expect to find inconsistencies or even errors in the code.
 2. Change to the directory: `cd lpthw`
 3. Get the environment up: `vagrant up`
 
+Under the hood, the Vagrantfile defines a virtual machine with with the necessary dependencies to run the code
+in this repository.
+To solve the dependencies and get the environment provisioned and configured I decided to go with provisioning scripts
+in a Dockerfile-like way. The provisioning scripts are in the `provision` directory and are applied layer by layer 
+to the base image defined in the Vagrantfile in this order:
+1. [bootstrap](provision/shell/bootstrap.sh): My own bootstrap script to install my favorite tools and dependencies.
+2. [python-bootstrap](provision/shell/bootstrap-python.sh): Install Python dependencies. 
+3. [vimrc]: My own vim configuration file. #TODO: Add the vimrc file and other dodfiles.
+4. [src](src): The source code for the exercises and other projects.
+
+   Since this project was originaly intended for [Libvirt/KVM](https://libvirt.org/) I decided to go with the nfs 4 syncing strategy since it fitted my needs better than the default syncing strategy.
+
+
+
+
 ### Dependencies
 - [Vagrant](https://www.vagrantup.com/)
 - [Libvirt](https://libvirt.org/) is my choice but you can also use:
