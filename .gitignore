@@ -5,5 +5,4 @@
 .*swo
 
 .vagrant
-src/
-provision/synced_folder/sar/
+src/sarpyplot/data
