@@ -18,7 +18,9 @@ experience; so expect to find inconsistencies or even errors in the code.
 
 ### Dependencies
 - [Vagrant](https://www.vagrantup.com/)
+- [Libvirt](https://libvirt.org/) is my choice but you can also use:
 - [VirtualBox](https://www.virtualbox.org/) or other virtualization software supported by Vagrant
+- [Vagrant libvirt plugin](https://vagrant-libvirt.github.io/vagrant-libvirt/installation.html) if you go with Libvirt
 - [Git](https://git-scm.com/)
 
 ## Appendix
