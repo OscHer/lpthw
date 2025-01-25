@@ -14,12 +14,17 @@ experience; so expect to find inconsistencies or even errors in the code.
 
 
 ## Appendix
+### TO-DO
+- [] Add Dotfiles
+- [] Add How-to get the full lab up and running
+
 ### About the author
-Óscar Heredia 65867332+OscHer@users.noreply.github.com
+Óscar Heredia
+[GitHub](https://github.com/oscher)
 ### Bibliography and references
 * [Learn Python the Hard Way](https://learnpythonthehardway.org/book/)
 * [Learn Python the Hard Way GitHub repository](https://github.com/zedshaw/learn-python3-thw-code)
 * [Zed A. Shaw](https://zedshaw.com/)
 * [Learn more Python the hard way GitHub repository](https://github.com/zedshaw/learn-more-python-the-hard-way-solutions)
 * [Other Learn X the Hard Way](https://learncodethehardway.org/)
-* [Other Zed Shaw's books](https://www.informit.com/imprint/series_detail.aspx?ser=3511331
+* [Other Zed Shaw's books](https://www.informit.com/imprint/series_detail.aspx?ser=3511331)
