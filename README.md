@@ -11,7 +11,15 @@ You may also find some additional files in the folders that are not part of the 
 These files are there to help me understand the exercises better or even try different things for my own learning 
 experience; so expect to find inconsistencies or even errors in the code.
 
+## How to use this repository
+1. Clone the repository:`git clone https://github.com/OscHer/lpthw.git`
+2. Change to the directory: `cd lpthw`
+3. Get the environment up: `vagrant up`
 
+### Dependencies
+- [Vagrant](https://www.vagrantup.com/)
+- [VirtualBox](https://www.virtualbox.org/) or other virtualization software supported by Vagrant
+- [Git](https://git-scm.com/)
 
 ## Appendix
 ### TO-DO
