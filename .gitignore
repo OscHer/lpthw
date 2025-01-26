@@ -6,3 +6,4 @@
 
 .vagrant
 src/sarpyplot/data
+src/sarpyplot/env
