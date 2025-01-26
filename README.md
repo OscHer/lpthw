@@ -23,10 +23,12 @@ in a Dockerfile-like way. The provisioning scripts are in the `provision` direct
 to the base image defined in the Vagrantfile in this order:
 1. [bootstrap](provision/shell/bootstrap.sh): My own bootstrap script to install my favorite tools and dependencies.
 2. [python-bootstrap](provision/shell/bootstrap-python.sh): Install Python dependencies. 
-3. [vimrc]: My own vim configuration file. #TODO: Add the vimrc file and other dodfiles.
+3. **vimrc**: My own vim configuration file. #TODO: Add the vimrc file and other dotfiles to appendix
 4. [src](src): The source code for the exercises and other projects.
-
-   Since this project was originaly intended for [Libvirt/KVM](https://libvirt.org/) I decided to go with the nfs 4 syncing strategy since it fitted my needs better than the default syncing strategy.
+   <details>
+    <summary>Why<summary>
+       Since this project was originaly intended for [Libvirt/KVM](https://libvirt.org/) I decided to go with the nfs 4 syncing strategy since it fitted my needs better than the default syncing strategy.
+    </details>
 
 
 
