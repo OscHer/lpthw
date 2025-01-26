@@ -18,20 +18,26 @@ except subprocess.CalledProcessError as e:
     exit()
 
 # Convertir la salida a un DataFrame
-data = pd.read_csv(io.StringIO(output), sep=";", header=None)
+data = pd.read_csv(io.StringIO(output), sep=";")
 
-# Renombrar columnas clave (ajustar según formatod e salida)
-data.columns = ['Time', 'hostname', 'interval', 'cpu', 'user',
-                'nice', 'system', 'iowait', 'steal', 'idle']
 
-# Convertir la columna Time a datetime
-data['Time'] = pd.to_datetime(data['Time'])
+# Inspecionar columnas disponibles
+# TODO-oscar: añadir bloque a parámetro de lanzamiento en modo info o similar
+print("Columnas disponibles en los datos:")
+print(data.columns)
+
+# Convertir la columna Timestamp a datetime
+data['timestamp'] = pd.to_datetime(data['timestamp'], errors='coerce')
+
+# Filtrar los datos para el análisis de CPU
+cpu_data = data[data['CPU'] != "-1"]  # Excluye filas con cpu global = -1
 
 # Graficar
 plt.figure(figsize=(12, 6))
-plt.plot(data['Time'], data['user'], label='User CPU (%)')
-plt.plot(data['Time'], data['system'], label='System CPU (%)')
-plt.plot(data['Time'], data['idle'], label='Idle CPU (%)')
+for cpu_id in cpu_data['CPU'].unique():
+    cpu_subset = cpu_data[cpu_data['CPU'] == cpu_id]
+    plt.plot(cpu_subset['timestamp'],
+             cpu_subset['%user'], label=f'CPU {cpu_id}')
 
 plt.xlabel('Timestamp')
 plt.ylabel('CPU Usage(%)')
