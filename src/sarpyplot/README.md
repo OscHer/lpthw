@@ -3,10 +3,10 @@
 ## Sinopsis
 El objetivo de este repositorio es el de proporcionar una herramienta para la visualización de datos SAR (System Activity Report) en Python.
 
-### Librerías utilizadas
-\# TODO-oscar: WIP
+## How-To
 
-
+### Troubleshooting
+\#TODO-oscar: problemas con sadf y conversión datos con sadf -c
 
 
 ## Apéndice
