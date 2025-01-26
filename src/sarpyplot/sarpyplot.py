@@ -54,7 +54,6 @@ if not cpu_data.empty:
         plt.legend()
         plt.grid()
         plt.tight_layout()
-        plt.show()
 
 
 # Cargar memoria si está disponible en el dataset
@@ -80,7 +79,8 @@ if not memory_data.empty:
     plt.legend()
     plt.grid()
     plt.tight_layout()
-    plt.show()
 else:
     print("No se encontraron datos de memoria en el archivo SAR")
     print("No se puede graficar la memoria")
+
+plt.show()
