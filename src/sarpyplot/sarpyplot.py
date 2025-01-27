@@ -27,6 +27,23 @@ sar_file = "data/sa01.new"
 cpu_command = f"sadf -d {sar_file} -- -u"
 memory_command = f"sadf -d {sar_file} -- -r"
 network_command = f"sadf -d {sar_file} -- -n DEV"
+# TODO: añadir más comandos para extraer más métricas de SAR
+# * -b: I/O y bloqueo
+# * -d: Actividad de dispositivos
+# * -q: Carga de procesos
+# * -y: TTY
+# * -v: Inodos y semáforos
+# * -w: Cambios de contexto
+# * -W: Cambios de contexto de E/S
+# * -I: Interrupciones
+# * -H: Interrupciones de hardware
+# * -P: Interrupciones de software
+# * -R: Memoria de páginas
+# * -S: Memoria de swap
+# * -U: Utilización de CPU
+# * -V: Memoria virtual
+# * -Y: TTY
+# * -Z: Memoria de caché
 
 
 # Inspecionar columnas disponibles
