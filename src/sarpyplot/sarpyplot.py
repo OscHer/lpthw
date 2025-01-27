@@ -30,7 +30,7 @@ network_command = f"sadf -d {sar_file} -- -n DEV"
 # TODO: añadir más comandos para extraer más métricas de SAR
 # * -b: I/O y bloqueo
 # * -d: Actividad de dispositivos
-# * -q: Carga de procesos
+# * -q: Carga de procesos. Cola. IMPORTANTE
 # * -y: TTY
 # * -v: Inodos y semáforos
 # * -w: Cambios de contexto
