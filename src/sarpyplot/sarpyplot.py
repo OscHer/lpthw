@@ -26,6 +26,7 @@ sar_file = "data/sa01.new"
 # Extraer datos de CPU en CSV
 cpu_command = f"sadf -d {sar_file} -- -u"
 memory_command = f"sadf -d {sar_file} -- -r"
+network_command = f"sadf -d {sar_file} -- -n DEV"
 
 
 # Inspecionar columnas disponibles
@@ -54,6 +55,8 @@ if not cpu_data.empty:
         plt.legend()
         plt.grid()
         plt.tight_layout()
+else:
+    print("No se encontraron datos de CPU en el archivo SAR")
 
 
 # Cargar memoria si está disponible en el dataset
@@ -81,6 +84,36 @@ if not memory_data.empty:
     plt.tight_layout()
 else:
     print("No se encontraron datos de memoria en el archivo SAR")
-    print("No se puede graficar la memoria")
+
+
+# Cargar red si está disponible en el dataset
+network_data = load_metrics(network_command, ['timestamp', 'rxpck/s',
+                                              'txpck/s', 'rxkB/s', 'txkB/s'])
+if not network_data.empty:
+    # TODO-oscar: añadir logging:
+    print("Datos de red cargados correctamente")
+    network_data['timestamp'] = pd.to_datetime(network_data['timestamp'],
+                                               errors='coerce')
+
+    # Graficar métricas de red
+    plt.figure(figsize=(12, 6))
+    plt.plot(network_data['timestamp'], network_data['rxpck/s'],
+             label='Received per second')
+    plt.plot(network_data['timestamp'], network_data['txpck/s'],
+             label='Transmitted per second')
+    plt.plot(network_data['timestamp'], network_data['rxkB/s'],
+             label='Received KB per second')
+    plt.plot(network_data['timestamp'], network_data['txkB/s'],
+             label='Transmitted KB per second')
+    plt.xlabel('Timestamp')
+    plt.xlabel('Timestamp')
+    plt.ylabel('Network Usage')
+    plt.title(f'Network Usage Metrics from {sar_file}')
+    plt.legend()
+    plt.grid()
+    plt.tight_layout()
+else:
+    print("No se encontraron datos de memoria en el archivo SAR")
+
 
 plt.show()
