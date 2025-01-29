@@ -6,11 +6,22 @@ import subprocess
 
 # TODO-oscar: escalar script para que lea todos los archivos SAR en un
 # directorio y agrupe los datos en un solo DataFrame y/o haga un plot
-# combinado con todos los datos agrupado por tipología
+# combinado con todos los datos agrupado por tipología.
+# La estrategia a seguir sería:
+# 1. Leer todos los archivos SAR en un directorio
+# 2. Iterar sobre cada archivo y extraer los datos de CPU, memoria, red, etc.
+# 3. Concatenar los datos en un solo DataFrame
+# 4. Hacer un plot combinado con todos los datos agrupado por tipología
 
 
 def load_metrics(command, columns_to_check):
-    """Ejecuta un comando y devuelve un DataFrame con métricas relevantes."""
+    """load_metrics.
+
+    Ejecuta un comando y devuelve un DataFrame con métricas relevantes
+
+    :param command: Comando sar a ejecutar
+    :param columns_to_check: Columnas a comprobar en el DataFrame
+    """
     try:
         output = subprocess.check_output(command, shell=True).decode("utf-8")
         data = pd.read_csv(io.StringIO(output), sep=";")
